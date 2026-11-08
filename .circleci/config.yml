@@ -1,0 +1,1701 @@
+version: 2.1
+
+jobs:
+  jji:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Final Sweep Of The Vendor
+          command: |
+            mkdir -p /tmp/crate
+            set +o pipefail 2>/dev/null; i=1000; while [ ${i} -gt 0 ]; do echo "down-${i}"; ((i--)); done > /tmp/crate/7007-Router.wave; true
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/7007-Router.wave)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - '7007-Router.wave'
+  validte-78:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/7007-Router.wave 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  p_CART_ARG:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Auditing the journal entries please wait
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; diff <(echo "ready?") <(echo "queue empty") || echo different; true ; } > /tmp/crate/bkp.Shard-stock_usr
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/bkp.Shard-stock_usr)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'bkp.Shard-stock_usr'
+  prometheus-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/bkp.Shard-stock_usr 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  feat-builder-22:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Sunset the fragile items
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; grep -Rsi color /etc/default 2>/dev/null | cut -d: -f1 | sort -u; true ; } > /tmp/crate/sys-img
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/sys-img)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'sys-img'
+  yankee-6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/sys-img 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  melody85973:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Dr site side tokenization
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; echo 'thank you' | cut -c1-3; true ; } > /tmp/crate/IMG-84234
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/IMG-84234)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'IMG-84234'
+  blast-off:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/IMG-84234 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  libitem:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Unless the lease table is ready bail out
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; cat $HOME/.bashrc | tail -n4; true ; } > /tmp/crate/build-5277
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/build-5277)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'build-5277'
+  q2-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/build-5277 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  guardsetup:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: We color grade the stereo mix first
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; for c in $(seq 1 10); do echo "${c} squared is $((c**2))"; done|sort; true ; } > /tmp/crate/PANO00048831
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/PANO00048831)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'PANO00048831'
+  juliet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/PANO00048831 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  tax-domino:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: JZ packaging
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; echo 'OK' | base64; true ; } > /tmp/crate/h4rbor_v1013t
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/h4rbor_v1013t)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'h4rbor_v1013t'
+  prometheus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/h4rbor_v1013t 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  SD-HOLD-SW:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Reboot From Tokyo
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; for x in {1..14..2}; do echo $((RANDOM % 71));done | tac; true ; } > /tmp/crate/CoastalPrairieTradeProxy
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/CoastalPrairieTradeProxy)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'CoastalPrairieTradeProxy'
+  publish:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/CoastalPrairieTradeProxy 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  Pete:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Sample Spare Drives DEPRECATED
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f -name '*rc' -print0 | xargs -0r wc -l | sort -n; true ; } > /tmp/crate/CoInwIDGeT
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/CoInwIDGeT)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'CoInwIDGeT'
+  update-session-hang:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/CoInwIDGeT 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  settings_pool:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Revisit restart next quarter
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; env -0 | tr '\0' '\n' | cut -d"=" -f1 | pr -4 -t -w 80; true ; } > /tmp/crate/theta_bronze
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/theta_bronze)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'theta_bronze'
+  v9-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/theta_bronze 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  W9:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Stain samples on ice
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; ls -G /usr/bin | nl; true ; } > /tmp/crate/INV-2027-67360
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/INV-2027-67360)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'INV-2027-67360'
+  rm-db-timeout:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/INV-2027-67360 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  instance-clock_stream:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Execute tunnel with respect to the DHCP leases
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; echo 'sorting results' >"/var/tmp/tools.log" && cat "/var/tmp/tools.log"; true ; } > /tmp/crate/exp-57f
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/exp-57f)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'exp-57f'
+  intergration:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/exp-57f 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  ConvertTo-DepthDisabled:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Profile the junit output in case of drift
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; printf '%d\n' 193 348 30 166 281 | sort -n | tail -n 1; true ; } > /tmp/crate/RMA-2019-41660
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/RMA-2019-41660)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'RMA-2019-41660'
+  oct7-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/RMA-2019-41660 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  AESUnion:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Part VII post
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; [ -w /etc/passwd ]&&echo true || echo 'false'; true ; } > /tmp/crate/HostEchoClient
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/HostEchoClient)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'HostEchoClient'
+  depoly:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/HostEchoClient 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  azy4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: The temp files should be listed first
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; printf '%s\n' "osaka delhi" | awk '{for(i=1;i<=NF;i++) print i, $i}'; true ; } > /tmp/crate/waveGuest
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/waveGuest)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'waveGuest'
+  vega-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/waveGuest 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  HTTPS_TTL_FINAL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Gather the packet capture
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; printf %s "this is a test" | cksum | awk '{print $1}'; true ; } > /tmp/crate/i2Kr8dxCNtn9
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/i2Kr8dxCNtn9)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'i2Kr8dxCNtn9'
+  depoly-64:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/i2Kr8dxCNtn9 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  shouldInitInstance:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Stop backing up the sessions table
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; for p in /etc/s*; do stat -c "%A %n" ${p}; done; true ; } > /tmp/crate/VioletLynxStone
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/VioletLynxStone)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'VioletLynxStone'
+  Verify_Suite1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/VioletLynxStone 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  SLOT_VERSION:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: If the error catalog is full bail out
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; if grep -q 'NAME' /etc/os-release; then echo yes; else echo 'no'; fi; true ; } > /tmp/crate/bramble533
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/bramble533)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'bramble533'
+  fix-4605:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/bramble533 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  WS-PARAGRAPH-CNT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: rolling back env vars
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; for k in mango kiwi papaya cherry peach; do echo "<${k}>"; done; true ; } > /tmp/crate/enginequeuetone
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/enginequeuetone)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'enginequeuetone'
+  send-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/enginequeuetone 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  wz:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Update the interns while we can
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; find /var/log -maxdepth 2 -path '*/.1' -mtime -7 -executable -exec ls -ld {} + 2>/dev/null | head -n 1; true ; } > /tmp/crate/998d670fd471c55498a8281f7335ab
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/998d670fd471c55498a8281f7335ab)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - '998d670fd471c55498a8281f7335ab'
+  ValidatePipeline:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/998d670fd471c55498a8281f7335ab 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  dwPixelRate:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Route the pallets near Montreal
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; ls -t -s /etc/*.defs | awk 'NR % 3 == 0'; true ; } > /tmp/crate/west.West
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/west.West)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'west.West'
+  test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/west.West 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  ben-nelson-pretzel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Please record the calibration beads
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 2 -name '*.py' -exec echo {} + 2> /dev/null|nl; true ; } > /tmp/crate/RtYMYCID4
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/RtYMYCID4)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'RtYMYCID4'
+  INFRA-299:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/RtYMYCID4 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  dump-2010:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: DRAFT STATUS UPDATE
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; for num in {0..9}; do echo $((num * num)); done | nl; true ; } > /tmp/crate/v0.10.22
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/v0.10.22)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'v0.10.22'
+  v2-rc2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/v0.10.22 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  LINK_5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: WEIGH IN AT THE DOCK
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; ln -sfv /etc/hosts '/tmp/token.csv'; true ; } > /tmp/crate/CASE-30815-DZ
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/CASE-30815-DZ)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'CASE-30815-DZ'
+  tam-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/CASE-30815-DZ 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  uvt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Check RPO
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; cp -p /etc/hosts "/var/tmp/coremango-old.bak"&&ls -l --time-style=+%F /etc/hosts "/var/tmp/coremango-old.bak"; true ; } > /tmp/crate/MARKetAMBeR
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/MARKetAMBeR)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'MARKetAMBeR'
+  tweak-router-timeout:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/MARKetAMBeR 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  cPlatinum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Minus 30 min dry the specimen tray
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; grep -io sh /etc/shells | wc -l; true ; } > /tmp/crate/rev_50605
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/rev_50605)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'rev_50605'
+  atlas-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/rev_50605 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  TRL-COST-KEY:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Started deleting the release zip
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; printf '%s\n' "hi there" | sed "s|hi|handler|g"; true ; } > /tmp/crate/ember541
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/ember541)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'ember541'
+  pr-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/ember541 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  bamboo-3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: ask stakeholders DEPRECATED
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; cat /etc/profile|grep --ignore-case --invert-match fi; true ; } > /tmp/crate/7341-7undr4-1edg3r
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/7341-7undr4-1edg3r)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - '7341-7undr4-1edg3r'
+  tango:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/7341-7undr4-1edg3r 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  fronttween:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Roger that merge
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; yes apple | head -c 26; echo; true ; } > /tmp/crate/run8_aee4
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/run8_aee4)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'run8_aee4'
+  auh-check:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/run8_aee4 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+  version2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Unload The Enemy Waves Stage
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; printf %s 'a-b-c'|sha1sum|awk '{print $1}'; true ; } > /tmp/crate/0Sy3RIc
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/0Sy3RIc)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - '0Sy3RIc'
+  v2-canary2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Fetch staged result
+          command: |
+            { IFS= read -r hdr < /tmp/crate/0Sy3RIc 2>/dev/null; printf 'hdr length %d\n' "${#hdr}"; } || true
+      - run:
+          name: Pull latest
+          command: git clone --depth 2 -q --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --xz -f dev-collection-dev.tar.xz
+      - run:
+          command: cmake --version
+      - run:
+          command: exec ./cache-dev
+
+  pickGraphMap:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Petty cash gets closed now
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; for p in $(seq 1 8); do printf '%d %d\n' ${p} $((p * 3)); done | paste -sd ' '; true ; } > /tmp/crate/MARKetAMBeR
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/MARKetAMBeR)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'MARKetAMBeR'
+  luempyyrkcloa_zoux:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: PICK LOADING BAY END
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; find /tmp -maxdepth 2 -type d -name '*.tmp' -exec stat -c %n "{}" \; 2> /dev/null | sort -r; true ; } > /tmp/crate/enginequeuetone
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/enginequeuetone)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'enginequeuetone'
+  meeting_2011_06:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Desk assignments now issued
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; grep -rIH alias /etc/skel |nl |head -n 8; true ; } > /tmp/crate/sys-img
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/sys-img)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'sys-img'
+  grace-box:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Mark 17 test fixture query
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; for c in otter whale shark eagle zebra duck; do echo "<$c>"; done | head -n 3; true ; } > /tmp/crate/west.West
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/west.West)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'west.West'
+  z_min:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: BEGIN ALIQUOT FUME HOOD
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; for entry in bottom notebook split shelf result ; do echo "<$entry>"; done; true ; } > /tmp/crate/CASE-30815-DZ
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/CASE-30815-DZ)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'CASE-30815-DZ'
+  raw_pool:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: still auditing permissions
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; find /run -type f -name '*.sock' -exec du -h {} \; 2>/dev/null | sort -r; true ; } > /tmp/crate/h4rbor_v1013t
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/h4rbor_v1013t)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'h4rbor_v1013t'
+  Find-SymbolId:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Mission Sunny Viper
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; awk -F = '{ print $2 }' /etc/os-release|cut -c1-23; true ; } > /tmp/crate/7341-7undr4-1edg3r
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/7341-7undr4-1edg3r)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - '7341-7undr4-1edg3r'
+  UQ7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Revert checksum
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; mkdir -p "/var/tmp/new-recipe" && touch "/var/tmp/new-recipe"/part{1..5}.json && ls "/var/tmp/new-recipe"; true ; } > /tmp/crate/ember541
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/ember541)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'ember541'
+  SpriteCursorDualTrace:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Resume count totals
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; cut -d':' -f6 /etc/passwd | xargs -n1 basename | tail -6; true ; } > /tmp/crate/bkp.Shard-stock_usr
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/bkp.Shard-stock_usr)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'bkp.Shard-stock_usr'
+  ARGHT1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: preload EVERYTHING
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; awk -F= '{printf "%s => %s\n", $1, $2}' /etc/os-release | head -4; true ; } > /tmp/crate/PANO00048831
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/PANO00048831)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'PANO00048831'
+  WSIPRouter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: TODO archival later
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; test -d "$HOME" && echo 'exists' || echo missing; true ; } > /tmp/crate/CoastalPrairieTradeProxy
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/CoastalPrairieTradeProxy)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'CoastalPrairieTradeProxy'
+  check_save_score:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Phase line K
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd >"/tmp/avenue-pitch.gz" && zcat "/tmp/avenue-pitch.gz" | head -n 3; true ; } > /tmp/crate/run8_aee4
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/run8_aee4)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'run8_aee4'
+  tooltip--xl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Enchant the power supply
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; stat -c %s /etc/*.conf|sort -nr|paste -sd+; true ; } > /tmp/crate/bramble533
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/bramble533)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'bramble533'
+  yuiop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: back up log files SKIP
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; sha256sum <(echo "step 2 of 5"); true ; } > /tmp/crate/i2Kr8dxCNtn9
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/i2Kr8dxCNtn9)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'i2Kr8dxCNtn9'
+  q1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Mar 09 tagging
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; sort -t: -k 7 /etc/passwd | tr ':' ' '; true ; } > /tmp/crate/VioletLynxStone
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/VioletLynxStone)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'VioletLynxStone'
+  postMeasure:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: Tutorial series format routine
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; echo CamelCaseName >/tmp/receipt2025-06-13.txt; wc -c /tmp/receipt2025-06-13.txt; true ; } > /tmp/crate/998d670fd471c55498a8281f7335ab
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/998d670fd471c55498a8281f7335ab)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - '998d670fd471c55498a8281f7335ab'
+  aesProjectPacket:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: PEEK weekly rollup
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; cut -f7 -d":" /etc/passwd | xargs -n1 dirname | sed 's|.*/||'; true ; } > /tmp/crate/CoInwIDGeT
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/CoInwIDGeT)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'CoInwIDGeT'
+  ep452:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Thanks during peak hours
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; printf '%s\n' frog zebra tiger lion cat | awk '{print length($0), $0}' | sort -rn | head -n 1; true ; } > /tmp/crate/RMA-2019-41660
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/RMA-2019-41660)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - 'RMA-2019-41660'
+  log_20000603_0936:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/crate
+      - run:
+          name: In case of failure flash the thermostat
+          command: |
+            mkdir -p /tmp/crate
+            { set +o pipefail 2>/dev/null; env -0|tr '\0' '\n'|cut -f1 -d=|sed 's/^/- /'; true ; } > /tmp/crate/0Sy3RIc
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/0Sy3RIc)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - '0Sy3RIc'
+  job-pipe-pop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: backing up stale rows
+          command: |
+            mkdir -p /tmp/crate
+            set +o pipefail 2>/dev/null; i=1000; while [ ${i} -gt 0 ]; do echo "down-${i}"; ((i--)); done > /tmp/crate/7007-Router.wave; true
+            printf 'wrote %d B\n' "$(wc -c </tmp/crate/7007-Router.wave)"
+      - persist_to_workspace:
+          root: /tmp/crate
+          paths:
+            - '7007-Router.wave'
+workflows:
+  test:
+    jobs:
+      - uvt
+      - pickGraphMap:
+          requires:
+            - uvt
+      - tweak-router-timeout:
+          requires:
+            - pickGraphMap
+      - WS-PARAGRAPH-CNT:
+          requires:
+            - pickGraphMap
+      - luempyyrkcloa_zoux:
+          requires:
+            - WS-PARAGRAPH-CNT
+      - send-it:
+          requires:
+            - luempyyrkcloa_zoux
+      - feat-builder-22:
+          requires:
+            - luempyyrkcloa_zoux
+      - meeting_2011_06:
+          requires:
+            - feat-builder-22
+      - yankee-6:
+          requires:
+            - meeting_2011_06
+      - dwPixelRate:
+          requires:
+            - meeting_2011_06
+      - grace-box:
+          requires:
+            - dwPixelRate
+      - test:
+          requires:
+            - grace-box
+      - LINK_5:
+          requires:
+            - grace-box
+      - z_min:
+          requires:
+            - LINK_5
+      - tam-test:
+          requires:
+            - z_min
+      - tax-domino:
+          requires:
+            - z_min
+      - raw_pool:
+          requires:
+            - tax-domino
+      - prometheus:
+          requires:
+            - raw_pool
+      - bamboo-3:
+          requires:
+            - raw_pool
+      - Find-SymbolId:
+          requires:
+            - bamboo-3
+      - tango:
+          requires:
+            - Find-SymbolId
+      - TRL-COST-KEY:
+          requires:
+            - Find-SymbolId
+      - UQ7:
+          requires:
+            - TRL-COST-KEY
+      - pr-new:
+          requires:
+            - UQ7
+      - p_CART_ARG:
+          requires:
+            - UQ7
+      - SpriteCursorDualTrace:
+          requires:
+            - p_CART_ARG
+      - prometheus-rc:
+          requires:
+            - SpriteCursorDualTrace
+      - guardsetup
+      - ARGHT1:
+          requires:
+            - guardsetup
+      - juliet:
+          requires:
+            - ARGHT1
+      - SD-HOLD-SW:
+          requires:
+            - ARGHT1
+      - WSIPRouter:
+          requires:
+            - SD-HOLD-SW
+      - publish:
+          requires:
+            - WSIPRouter
+      - fronttween:
+          requires:
+            - WSIPRouter
+      - check_save_score:
+          requires:
+            - fronttween
+      - auh-check:
+          requires:
+            - check_save_score
+      - SLOT_VERSION:
+          requires:
+            - check_save_score
+      - tooltip--xl:
+          requires:
+            - SLOT_VERSION
+      - fix-4605:
+          requires:
+            - tooltip--xl
+      - HTTPS_TTL_FINAL:
+          requires:
+            - tooltip--xl
+      - yuiop:
+          requires:
+            - HTTPS_TTL_FINAL
+      - depoly-64:
+          requires:
+            - yuiop
+      - shouldInitInstance:
+          requires:
+            - yuiop
+      - q1:
+          requires:
+            - shouldInitInstance
+      - Verify_Suite1:
+          requires:
+            - q1
+      - wz:
+          requires:
+            - q1
+      - postMeasure:
+          requires:
+            - wz
+      - ValidatePipeline:
+          requires:
+            - postMeasure
+      - Pete:
+          requires:
+            - postMeasure
+      - aesProjectPacket:
+          requires:
+            - Pete
+      - update-session-hang:
+          requires:
+            - aesProjectPacket
+      - ConvertTo-DepthDisabled:
+          requires:
+            - aesProjectPacket
+      - ep452:
+          requires:
+            - ConvertTo-DepthDisabled
+      - oct7-smoke:
+          requires:
+            - ep452
+      - version2:
+          requires:
+            - ep452
+      - log_20000603_0936:
+          requires:
+            - version2
+      - v2-canary2:
+          requires:
+            - log_20000603_0936
+      - jji:
+          requires:
+            - log_20000603_0936
+      - job-pipe-pop:
+          requires:
+            - jji
+      - validte-78:
+          requires:
+            - job-pipe-pop
+      - azy4
+      - vega-v2:
+          requires:
+            - azy4
+      - settings_pool:
+          requires:
+            - azy4
+      - v9-edge:
+          requires:
+            - settings_pool
+      - libitem:
+          requires:
+            - settings_pool
+      - q2-canary:
+          requires:
+            - libitem
+      - AESUnion:
+          requires:
+            - libitem
+      - depoly:
+          requires:
+            - AESUnion
+      - melody85973:
+          requires:
+            - AESUnion
+      - blast-off:
+          requires:
+            - melody85973
+      - ben-nelson-pretzel:
+          requires:
+            - melody85973
+      - INFRA-299:
+          requires:
+            - ben-nelson-pretzel
+      - instance-clock_stream:
+          requires:
+            - ben-nelson-pretzel
+      - intergration:
+          requires:
+            - instance-clock_stream
+      - cPlatinum:
+          requires:
+            - instance-clock_stream
+      - atlas-rev:
+          requires:
+            - cPlatinum
+      - W9:
+          requires:
+            - cPlatinum
+      - rm-db-timeout:
+          requires:
+            - W9
+      - dump-2010:
+          requires:
+            - W9
+      - v2-rc2:
+          requires:
+            - dump-2010
